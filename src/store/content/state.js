@@ -1,5 +1,6 @@
 const state = {
-  itemChecked: false
+  itemChecked: false,
+  data: []
 };
 
 export default state;

@@ -1,11 +1,10 @@
 import Axios from 'axios';
 import router from '../../router/router';
-
-const url = 'http://localhost:5000/api/user/';
+const url = require('../../helpers/urls');
 
 const actions = {
     signUp({ commit }, user) {
-        return Axios.post(`${url}/signup`, user).then((response) => {
+        return Axios.post(`${url.authentication}/signup`, user).then((response) => {
             localStorage.setItem('user', JSON.stringify(response.data.user));
             localStorage.setItem('jwt', response.data.token);
             if (localStorage.getItem('jwt') !== null) {
@@ -29,7 +28,7 @@ const actions = {
         });
     },
     signIn({ commit }, user) {
-        return Axios.post(`${url}/signin`, user).then((response) => {
+        return Axios.post(`${url.authentication}/signin`, user).then((response) => {
             localStorage.setItem('user', JSON.stringify(response.data.user));
             localStorage.setItem('jwt', response.data.token);
             if (localStorage.getItem('jwt') !== null) {

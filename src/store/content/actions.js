@@ -1,7 +1,13 @@
+
+import Axios from 'axios';
+const url = require('../../helpers/urls');
+
 const actions = {
-  DISPLAY_SNACKBAR({ commit, state }, payload) {
-    commit('SET_SNACKBAR_VISIBILITY', true),
-    commit('SET_SNACKBAR_MESSAGE', payload.text)
+  ADD_NEW_ITEM({ commit }, payload) {
+    Axios.post(`${url.items}`, {
+      title: payload.title,
+      createdAt: new Date()
+    })
   }
 };
 
