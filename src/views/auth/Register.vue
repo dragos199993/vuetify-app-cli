@@ -69,10 +69,14 @@ export default {
     }),
 
     submitSignup() {
-        this.$store.dispatch('authentication/signUp', {
-          email: this.email,
-          password: this.password,
-        });
+        this.$validator.validateAll().then( noError => {
+          if(noError){
+            this.$store.dispatch('authentication/signUp', {
+              email: this.email,
+              password: this.password,
+            });
+          }
+        })
     },
   }
 };

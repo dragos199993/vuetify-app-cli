@@ -1,5 +1,7 @@
 const state = {
-  loading: false
+  loading: false,
+  globalMessage: '',
+  snackbarVisible: false
 };
 
 export default state;

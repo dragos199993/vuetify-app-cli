@@ -13,6 +13,8 @@ const actions = {
                 commit('UPDATE_AUTHENTICATION', true);
                 commit('SET_AUTH_INFO', response.data.user);
                 commit('helpers/SET_LOADING', false, { root: true });
+                commit('helpers/SET_SNACKBAR_VISIBILITY', true, { root: true }),
+                commit('helpers/SET_SNACKBAR_MESSAGE', `Successfully registered ${user.email}!`, { root: true })
                 router.push('/');
             }
         }).catch(() => {

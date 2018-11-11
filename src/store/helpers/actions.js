@@ -1,12 +1,7 @@
 const actions = {
-  success({ commit }, message) {
-    commit("success", message);
-  },
-  error({ commit }, message) {
-    commit("error", message);
-  },
-  clear({ commit }, message) {
-    commit("success", message);
+  DISPLAY_SNACKBAR({ commit, state }, payload) {
+    commit('SET_SNACKBAR_VISIBILITY', true),
+    commit('SET_SNACKBAR_MESSAGE', payload.text)
   }
 };
 
