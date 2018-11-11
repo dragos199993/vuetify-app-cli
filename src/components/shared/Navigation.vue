@@ -70,7 +70,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: true
+    drawer: null
   }),
   computed: {
     appName() {
