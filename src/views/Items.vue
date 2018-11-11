@@ -14,11 +14,14 @@
                 ></v-text-field>
                 <v-list subheader>
                     <v-subheader>Items in your list</v-subheader>
-                    <Item v-for="(item, index) in fetchedItems" 
-                    :key="index" 
-                    :title="item.title" 
-                    :id="item._id"
-                    :checked="item.checked"/>
+                    <transition-group name="slide-down">
+                        <Item v-for="(item, index) in fetchedItems" 
+                        :key="index" 
+                        :title="item.title" 
+                        :id="item._id"
+                        :checked="item.checked"
+                        :index="index"/>
+                    </transition-group>
                 </v-list>
             </v-flex>
         </v-layout>
@@ -37,9 +40,7 @@ export default {
         items: []
     }),
     created(){
-        Axios.get(url.items).then( res => {
-            this.fetchContent(res.data)
-        })
+        this.$store.dispatch('content/FETCH_ITEMS');
     },
     computed: {
         ...mapGetters('content', ['fetchedItems'])

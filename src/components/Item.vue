@@ -8,7 +8,7 @@
             <v-list-tile-title>{{ title }}</v-list-tile-title>
         </v-list-tile-content>
         <v-list-tile-action @click="deleteItem(id, index)">
-            <v-tooltip right>
+            <v-tooltip top>
                 <v-btn icon ripple slot="activator">
                     <v-icon color="grey lighten-1">delete</v-icon>
                 </v-btn>
@@ -22,7 +22,7 @@
 import { mapMutations } from 'vuex';
 
 export default {
-    props: ['title', 'checked', 'id'],
+    props: ['title', 'checked', 'id', 'index'],
     computed: {
         itemChecked: {
             get(){
@@ -38,7 +38,10 @@ export default {
             checkItem: 'CHECK_ITEM'
         }),
         deleteItem(id, index){
-            console.log(id, index);
+            this.$store.dispatch('content/DELETE_ITEM', {
+                id: this.id,
+                index: this.index
+            })
         }
     }
 }
