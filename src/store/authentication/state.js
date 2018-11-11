@@ -1,6 +1,11 @@
 const state = {
   authenticated: false,
-  generalError: ""
+  authInfo: JSON.parse(localStorage.getItem('user')),
+  generalError: '',
+  auth: {
+    loginFormVisibility: false,
+    registerFormVisibility: false,
+  },
 };
 
 export default state;
