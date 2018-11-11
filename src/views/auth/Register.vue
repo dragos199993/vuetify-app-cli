@@ -8,7 +8,7 @@
                 <v-toolbar-title>Register an account</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form @submit.prevent="submitSignup">
                   <v-text-field       
                     v-validate="'required|email'"
                     prepend-icon="person" 
@@ -44,7 +44,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary">Login</v-btn>
+                <v-btn @click="submitSignup" color="primary">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -69,17 +69,10 @@ export default {
     }),
 
     submitSignup() {
-      this.loading(true);
-      if (this.passwordConfirm === this.password) {
         this.$store.dispatch('authentication/signUp', {
           email: this.email,
           password: this.password,
         });
-        this.error('');
-      } else {
-        this.error('Password must be the same');
-        this.loading(false);
-      }
     },
   }
 };
