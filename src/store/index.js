@@ -15,6 +15,6 @@ export default new Vuex.Store({
   },
   state: {
     appName: "Confly",
-    appDescription: "life organizer"  
+    appDescription: "life organizer"
   }
 });

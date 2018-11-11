@@ -1,10 +1,8 @@
 <template>
-  <v-app>
+  <v-app dark>
     <Navigation />
-    <router-view/>
-    <v-footer app fixed>
-      <span>&copy; 2017</span>
-    </v-footer>
+    <router-view />
+    <v-footer app fixed> <span>&copy; 2017</span> </v-footer>
   </v-app>
 </template>
 
