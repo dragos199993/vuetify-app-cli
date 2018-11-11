@@ -2,7 +2,7 @@ import Vue from "vue";
 import "./plugins/vuetify";
 import "./plugins/veevalidate";
 import App from "./App.vue";
-import router from "./router";
+import router from "./router/router";
 import store from "./store/index";
 import "./registerServiceWorker";
 import "roboto-fontface/css/roboto/roboto-fontface.css";

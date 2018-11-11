@@ -1,13 +1,14 @@
 <template>
     <v-snackbar
-      v-model="snackbar"
+      v-model="snackbarVisible"
       :multi-line="mode == 'multi-line'"
       :timeout="timeout"
       :top="y === 'top'"
+      :color= "snackbar.color"
     >
-      {{ globalMessage }}
+      {{ snackbar.message }}
       <v-btn
-        color="pink"
+        color="light"
         flat
         @click="closeSnackbar"
       >
@@ -27,13 +28,10 @@ export default {
     timeout: 5000
   }),
   computed: {
-    ...mapGetters("helpers", {
-      globalMessage: "globalMessage",
-      snackbarVisible: "snackbarVisible"
-    }),
-    snackbar: {
+    ...mapGetters("helpers", ['snackbar'] ),
+    snackbarVisible: {
       get() {
-        return this.snackbarVisible;
+        return this.snackbar.visible;
       },
       set() {
         this.setSnackbarVisibility(false);
@@ -42,10 +40,14 @@ export default {
   },
   methods: {
     ...mapMutations("helpers", {
-      setSnackbarVisibility: "SET_SNACKBAR_VISIBILITY"
+      setSnackbarVisibility: "SET_SNACKBAR"
     }),
     closeSnackbar(){
-      this.setSnackbarVisibility(false)
+      this.setSnackbarVisibility({
+        visible: false,
+        message: '',
+        color: ''
+      })
     }
   }
 };

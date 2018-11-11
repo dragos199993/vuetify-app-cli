@@ -1,7 +1,6 @@
 const getters = {
     loading: state => state.loading,
-    globalMessage: state => state.globalMessage,
-    snackbarVisible: state => state.snackbarVisible
+    snackbar: state => state.snackbar
 };
 
 export default getters;

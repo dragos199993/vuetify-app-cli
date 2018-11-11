@@ -54,30 +54,31 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState } from "vuex";
 
 export default {
   data: () => ({
-    email: '',
-    password: '',
-    repeat: ''
+    email: "",
+    password: "",
+    repeat: ""
   }),
 
   methods: {
-    ...mapMutations('helpers', {
-      loading: 'SET_LOADING',
+    ...mapMutations("helpers", {
+      loading: "SET_LOADING"
     }),
 
     submitSignup() {
-        this.$validator.validateAll().then( noError => {
-          if(noError){
-            this.$store.dispatch('authentication/signUp', {
-              email: this.email,
-              password: this.password,
-            });
-          }
-        })
-    },
+      this.$validator.validateAll().then(noError => {
+        if (noError) {
+          this.loading(true);
+          this.$store.dispatch("authentication/signUp", {
+            email: this.email,
+            password: this.password
+          });
+        }
+      });
+    }
   }
 };
 </script>

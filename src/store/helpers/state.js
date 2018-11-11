@@ -1,7 +1,10 @@
 const state = {
   loading: false,
-  globalMessage: '',
-  snackbarVisible: false
+  snackbar: {
+    message: '',
+    visible: false,
+    color: ''
+  }
 };
 
 export default state;
