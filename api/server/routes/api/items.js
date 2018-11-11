@@ -4,16 +4,16 @@ const mongodb = require('mongodb')
 const router = express.Router()
 
 
-// Get Posts
+// Get items
 router.get('/', async (req, res) => {
-    const posts = await loadPostsCollection()
-    res.send(await posts.find({}).toArray())
+    const items = await loadItemsCollection()
+    res.send(await items.find({}).toArray())
 })
 
-// Add Posts
+// Add items
 router.post('/', async (req, res) => {
-    const posts = await loadPostsCollection()
-    await posts.insertOne({
+    const items = await loadItemsCollection()
+    await items.insertOne({
         text: req.body.text,
         createdAt: new Date()
     })
@@ -23,15 +23,15 @@ router.post('/', async (req, res) => {
 // Delete Post
 
 router.delete('/:id', async (req, res) => {
-    const posts = await loadPostsCollection()
-    await posts.deleteOne({_id: new mongodb.ObjectID(req.params.id)})
+    const items = await loadItemsCollection()
+    await items.deleteOne({_id: new mongodb.ObjectID(req.params.id)})
     res.status(200).send()
 })
 
-async function loadPostsCollection() {
+async function loadItemsCollection() {
     const client = await mongodb.MongoClient.connect
     (process.env.MONGO_API, {useNewUrlParser: true})
-    return client.db(process.env.MONGO_DB_NAME).collection('posts')
+    return client.db(process.env.MONGO_DB_NAME).collection('items')
 }
 
 module.exports = router

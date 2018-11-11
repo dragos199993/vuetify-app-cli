@@ -1,54 +1,33 @@
 <template>
     <v-container grid-list-xl text-xs-center>
         <v-layout row wrap>
-            <v-flex md12 lg6 offset-lg3>
-                <v-list subheader two-line>
+            <v-flex md12 lg6 offset-lg3 class="mt-5">
+                <v-list subheader>
                     <v-subheader>Hangout notifications</v-subheader>
-                    <v-list-tile>
-                    <v-list-tile-action>
-                        <v-checkbox></v-checkbox>
-                    </v-list-tile-action>
-
-                    <v-list-tile-content>
-                        <v-list-tile-title>Notifications</v-list-tile-title>
-                        <v-list-tile-sub-title>Allow notifications</v-list-tile-sub-title>
-                    </v-list-tile-content>
-                    </v-list-tile>
-
-                    <v-list-tile>
-                    <v-list-tile-action>
-                        <v-checkbox></v-checkbox>
-                    </v-list-tile-action>
-
-                    <v-list-tile-content>
-                        <v-list-tile-title>Sound</v-list-tile-title>
-                        <v-list-tile-sub-title>Hangouts message</v-list-tile-sub-title>
-                    </v-list-tile-content>
-                    </v-list-tile>
-
-                    <v-list-tile>
-                    <v-list-tile-action>
-                        <v-checkbox></v-checkbox>
-                    </v-list-tile-action>
-
-                    <v-list-tile-content>
-                        <v-list-tile-title>Video sounds</v-list-tile-title>
-                        <v-list-tile-sub-title>Hangouts video call</v-list-tile-sub-title>
-                    </v-list-tile-content>
-                    </v-list-tile>
-
-                    <v-list-tile>
-                    <v-list-tile-action>
-                        <v-checkbox></v-checkbox>
-                    </v-list-tile-action>
-
-                    <v-list-tile-content>
-                        <v-list-tile-title>Invites</v-list-tile-title>
-                        <v-list-tile-sub-title>Notify when receiving invites</v-list-tile-sub-title>
-                    </v-list-tile-content>
-                    </v-list-tile>
+                    <Item v-for="(item, index) in items" :key="index" :title="item.title" :checked="item.checked"/>
                 </v-list>
             </v-flex>
         </v-layout>
     </v-container>
 </template>
+
+<script>
+import Item from '../components/Item';
+import Axios from 'axios';
+
+const url = 'http://localhost:5000/api/';
+
+export default {
+    data: () => ({
+        items: []
+    }),
+    created(){
+        Axios.get(`${url}items`).then( res => {
+            this.items = res.data
+        })
+    },
+    components: {
+        Item
+    }
+}
+</script>
