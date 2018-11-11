@@ -25,18 +25,19 @@
                     :error-messages="errors.collect('password')"
                     data-vv-name="password"
                     name="password" 
-                    label="Password" 
+                    label="Password"
+                    ref="password"
                     v-model="password"
                     type="password">
                   </v-text-field>                  
                   <v-text-field 
-                    v-validate="'required|min:4'"
+                    v-validate="'required|min:4|confirmed:password'"
                     prepend-icon="lock" 
-                    :error-messages="errors.collect('repeatPassword')"
-                    data-vv-name="repeatPassword"
-                    name="repeatPassword" 
+                    :error-messages="errors.collect('repeat')"
+                    data-vv-name="repeat"
+                    name="repeat"  
                     label="Repeat Password" 
-                    v-model="repeatPassword"
+                    v-model="repeat"
                     type="password">
                   </v-text-field>
                 </v-form>
@@ -59,24 +60,16 @@ export default {
   data: () => ({
     email: '',
     password: '',
-    repeatPassword: ''
+    repeat: ''
   }),
 
   methods: {
-    ...mapMutations('alerts', {
-      error: 'ERROR',
-    }),
     ...mapMutations('helpers', {
       loading: 'SET_LOADING',
     }),
 
     submitSignup() {
       this.loading(true);
-      if (this.email === '' || this.password === '' || this.passwordConfirm === '') {
-        this.error('Fields cannot be empty');
-        this.loading(false);
-        return;
-      }
       if (this.passwordConfirm === this.password) {
         this.$store.dispatch('authentication/signUp', {
           email: this.email,
