@@ -1,5 +1,6 @@
 <template>
   <v-app dark>
+    <Loading />
     <Navigation />
     <transition name="slide-fade" mode="out-in">
       <router-view />
@@ -9,11 +10,13 @@
 </template>
 
 <script>
+import Loading from "./components/shared/Loading";
 import Navigation from "./components/shared/Navigation";
 export default {
   name: "App",
   components: {
-    Navigation
+    Navigation,
+    Loading
   },
   data() {
     return {

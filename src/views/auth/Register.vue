@@ -53,12 +53,41 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
+
 export default {
   data: () => ({
     email: '',
     password: '',
     repeatPassword: ''
   }),
-  components: {}
+
+  methods: {
+    ...mapMutations('alerts', {
+      error: 'ERROR',
+    }),
+    ...mapMutations('helpers', {
+      loading: 'SET_LOADING',
+    }),
+
+    submitSignup() {
+      this.loading(true);
+      if (this.email === '' || this.password === '' || this.passwordConfirm === '') {
+        this.error('Fields cannot be empty');
+        this.loading(false);
+        return;
+      }
+      if (this.passwordConfirm === this.password) {
+        this.$store.dispatch('authentication/signUp', {
+          email: this.email,
+          password: this.password,
+        });
+        this.error('');
+      } else {
+        this.error('Password must be the same');
+        this.loading(false);
+      }
+    },
+  }
 };
 </script>
